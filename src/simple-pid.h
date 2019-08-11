@@ -14,6 +14,17 @@ namespace simple_pid
 		
 		public:
 			Simple_Pid(double target_valuel, double p, double i, double d, double initial_timestamp);
+
+			void set_target_value(double value);
+			double get_target_value();
+
+			void set_p(double p);
+			double get_p();
+			void set_i(double i);
+			double get_i();
+			void set_d(double d);
+			double get_d();
+			
 			double calc_output(double input, double timestamp_in_millis);
 	};
 }
