@@ -2,7 +2,9 @@
 
 #include <iostream>
 
-simple_pid::Simple_Pid::Simple_Pid(double target_value, double p, double i, double d, double initial_timestamp) 
+using namespace simple_pid;
+
+Simple_Pid::Simple_Pid(double target_value, double p, double i, double d, double initial_timestamp) 
 {
 	_previous_error = 0;
 	_integral = 0;
@@ -13,47 +15,47 @@ simple_pid::Simple_Pid::Simple_Pid(double target_value, double p, double i, doub
 	_d = d;
 }
 
-void simple_pid::Simple_Pid::set_p(double p)
+void Simple_Pid::set_p(double p)
 {
 	_p = p;
 }
 
-double simple_pid::Simple_Pid::get_p()
+double Simple_Pid::get_p()
 {
 	return _p;
 }
 
-void simple_pid::Simple_Pid::set_i(double i)
+void Simple_Pid::set_i(double i)
 {
 	_i = i;
 }
 
-double simple_pid::Simple_Pid::get_i()
+double Simple_Pid::get_i()
 {
 	return _i;
 }
 
-void simple_pid::Simple_Pid::set_d(double d)
+void Simple_Pid::set_d(double d)
 {
 	_d = d;
 }
 
-double simple_pid::Simple_Pid::get_d()
+double Simple_Pid::get_d()
 {
 	return _d;
 }
 
-void simple_pid::Simple_Pid::set_target_value(double target_value)
+void Simple_Pid::set_target_value(double target_value)
 {
 	_target_value = target_value;
 }
 
-double simple_pid::Simple_Pid::get_target_value()
+double Simple_Pid::get_target_value()
 {
 	return _target_value;
 }
 
-double simple_pid::Simple_Pid::calc_output(double input, double timestamp_in_millis) 
+double Simple_Pid::calc_output(double input, double timestamp_in_millis) 
 {
 	double error = _target_value - input;
 	double delta_time = timestamp_in_millis - _previous_timestamp;
