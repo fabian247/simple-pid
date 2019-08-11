@@ -83,6 +83,48 @@ SCENARIO("PID functionality", "[simple-pid]") {
 			}	
 		}
 	}
+		
+	GIVEN("An I function with limited min output") {
+		simple_pid::Simple_Pid i_func = simple_pid::Simple_Pid(100, 0, 0.1, 0, 0);
+		i_func.set_min_output(-150);
+
+		GIVEN("A constant input matching the target value") {
+			REQUIRE(i_func.calc_output(100, 100) == 100);
+			REQUIRE(i_func.calc_output(100, 200) == 100);
+			REQUIRE(i_func.calc_output(100, 300) == 100);
+			REQUIRE(i_func.calc_output(100, 400) == 100);
+
+			WHEN("an increasing input would result in an output below min output") {
+				THEN("the output shold not decrease") {
+					double output1 = i_func.calc_output(101, 500);
+					double output2 = i_func.calc_output(200, 600);
+					REQUIRE(output1 < 100);
+					REQUIRE(output2 == output1);
+				}
+			}
+		}
+	}	
+	
+	GIVEN("An I function with limited max output") {
+		simple_pid::Simple_Pid i_func = simple_pid::Simple_Pid(100, 0, 0.1, 0, 0);
+		i_func.set_max_output(150);
+
+		GIVEN("A constant input matching the target value") {
+			REQUIRE(i_func.calc_output(100, 100) == 100);
+			REQUIRE(i_func.calc_output(100, 200) == 100);
+			REQUIRE(i_func.calc_output(100, 300) == 100);
+			REQUIRE(i_func.calc_output(100, 400) == 100);
+
+			WHEN("an decreasing input sould result in an output above max output") {
+				THEN("the output should  not increase") {				
+					double output1 = i_func.calc_output(99, 500);
+					double output2 = i_func.calc_output(0, 600);
+					REQUIRE(output1 > 100);
+					REQUIRE(output2 == output1);
+				}
+			}	
+		}
+	}
 
 	GIVEN("A D function") {
 		simple_pid::Simple_Pid d_func = simple_pid::Simple_Pid(100, 0, 0, 1, 0);
