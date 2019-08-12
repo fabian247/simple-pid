@@ -92,8 +92,8 @@ double Simple_Pid::calc_output(double input, double timestamp_in_millis)
 	};
 	
 	double derivative = (error - _previous_error) / delta_time;
-
-	double output = _target_value * (1 + (_p * error + _i * _integral + _d * derivative));
+	
+	double output = _p * error + _i * _integral + _d * derivative;
 	
 	_previous_error = error;
 	_previous_timestamp = timestamp_in_millis;
