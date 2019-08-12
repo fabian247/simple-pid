@@ -81,14 +81,14 @@ double Simple_Pid::get_min_output()
 double Simple_Pid::calc_output(double input, double timestamp_in_millis) 
 {
 	double error = _target_value - input;
-	double delta_time = timestamp_in_millis - _previous_timestamp;
+	double delta_time = (timestamp_in_millis - _previous_timestamp) / 1000;
 
 	// extreme edge case of double overflow is unhandled
 	if (
 		_integral + error * delta_time <= _max_output &&
 		_integral + error * delta_time >= _min_output
 	) {
-	_integral += error * delta_time;
+		_integral += error * delta_time;
 	};
 	
 	double derivative = (error - _previous_error) / delta_time;
