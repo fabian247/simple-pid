@@ -4,7 +4,7 @@
 
 SCENARIO("PID functionality", "[simple-pid]") {
 	GIVEN("A fully populated PID function") {
-		simple_pid::Simple_Pid pid = simple_pid::Simple_Pid(100, 1, 1, 1, 0);
+		simple_pid::Simple_Pid pid = simple_pid::Simple_Pid(100, 1, 1, 0.1, 0);
 
 		GIVEN("A constant input matching the target value") {
 			REQUIRE(pid.calc_output(100, 100) == 100);
@@ -85,8 +85,8 @@ SCENARIO("PID functionality", "[simple-pid]") {
 	}
 		
 	GIVEN("An I function with limited min output") {
-		simple_pid::Simple_Pid i_func = simple_pid::Simple_Pid(100, 0, 0.1, 0, 0);
-		i_func.set_min_output(-150);
+		simple_pid::Simple_Pid i_func = simple_pid::Simple_Pid(100, 0, 1, 0, 0);
+		i_func.set_min_output(-10);
 
 		GIVEN("A constant input matching the target value") {
 			REQUIRE(i_func.calc_output(100, 100) == 100);
@@ -106,8 +106,8 @@ SCENARIO("PID functionality", "[simple-pid]") {
 	}	
 	
 	GIVEN("An I function with limited max output") {
-		simple_pid::Simple_Pid i_func = simple_pid::Simple_Pid(100, 0, 0.1, 0, 0);
-		i_func.set_max_output(150);
+		simple_pid::Simple_Pid i_func = simple_pid::Simple_Pid(100, 0, 1, 0, 0);
+		i_func.set_max_output(10);
 
 		GIVEN("A constant input matching the target value") {
 			REQUIRE(i_func.calc_output(100, 100) == 100);
