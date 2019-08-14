@@ -11,8 +11,8 @@ Simple_Pid::Simple_Pid(double target_value, double p, double i, double d, double
 	_integral = 0;
 	_previous_timestamp = initial_timestamp;
 	_target_value = target_value;
-	_max_output = std::numeric_limits<double>::max() / 10;
-	_min_output = std::numeric_limits<double>::lowest() / 10;
+	_max_output = 10000;
+	_min_output = -10000;
 	_p = p;
 	_i = i;
 	_d = d;
